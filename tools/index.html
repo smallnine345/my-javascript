@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./tools.js"></script>
+    <script>
+        var a = [1,2,3,[3,4,5,{name:123,age:19}]]
+        var b = {
+            name:'xiaowang',
+            age:undefined,
+            girlFriend:{
+                name:null,
+                age:'18',
+                mes:['xiaohua',19]
+            }
+        }
+        var result = deepClone(b)
+        console.log(result)
+    </script>
+</body>
+</html>
