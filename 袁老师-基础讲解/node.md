@@ -665,7 +665,24 @@ prompt('提示文本')
 3. 得到一个随机数
  Math.random() 该表达式返回一个0~1之前的随机数字（无法取到1）
 
+## 类数组
+1. 属性为索引属性，必须有length属性，最好加上push
+```js
+var obj = {
+    0:'a',
+    1:'b',
+    2:'c',
+    'push':Array.prototype.push,
+    'splice':Array.prototype.splice
+}
 
+Array.prototype.push = function(target){
+    this[this.length] = target;
+    return this.length  ;
+}
+
+
+```
  
 
 

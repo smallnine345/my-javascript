@@ -44,3 +44,34 @@ function deepClone(origin,target){
 
 
 
+// 数组方法push、pop、shift、unshift、reverse、sort、splice
+Array.prototype.myPush = function(){
+    var len = arguments.length;
+    for(var i = 0 ; i < len ; i ++){
+        this[this.length] = arguments[i]
+    }
+    return this.length
+}
+// [1,2,3,4]
+Array.prototype.myPop = function(){
+    var len = this.length
+    if(len == 0){
+        return undefined
+    }
+    return this.splice([len - 1],1)[0]
+}
+
+// unshift
+Array.prototype.myUnshift = function(){
+    var that = deepClone(arguments);
+    for(var i = 0 ; i < this.length ; i ++){
+        that[that.length] = this[i]
+    }
+    deepClone(that,this)
+    return this
+}
+
+// shift
+Array.prototype.myShift = function(){
+    return this.splice(0,1)[0]
+}
