@@ -3,21 +3,25 @@
 // 对null和object进行细分和重新区分
 //  null（object->null） 
 // object-> object、array
+// 包装类
 function myTypeof(origin){
-    var prop = typeof(origin)
-    var str = '';
-    if(prop != 'object'){
-        str = prop
+    var obj = {
+        "[object Object]":"object",
+        "[object Array]":"array",
+        "[object Number]":"number-object",
+        "[object Boolean]":"boolean-object",
+        "[object String]":"string-object",
+    }
+    if(typeof(origin) != 'object'){
+        return typeof(origin)
     }else{
-        if(("" + origin) == "null"){
-            str = 'null'
-        }else if(Object.prototype.toString.call(origin) === '[object Array]'){
-            str = 'array'
-        }else if(Object.prototype.toString.call(origin) === '[object Object]'){ 
-            str = 'object'
+        if(origin == null){
+            return 'null'
+        }else {
+            return obj[Object.prototype.toString.call(origin)]
         }
     }
-    return str
+
 }
 
 
@@ -41,37 +45,29 @@ function deepClone(origin,target){
     return target
 }
 
-
-
-
-// 数组方法push、pop、shift、unshift、reverse、sort、splice
-Array.prototype.myPush = function(){
-    var len = arguments.length;
-    for(var i = 0 ; i < len ; i ++){
-        this[this.length] = arguments[i]
+// unique 数组去重 
+Array.prototype.unique = function(){
+    var len = this.length,
+        temp = {},
+        result = [];
+    for(var i = 0 ; i < len ; i++ ){
+        if( !temp[this[i]] ){
+            temp[this[i]] = 'i';
+            result.push(this[i])
+        }
     }
-    return this.length
-}
-// [1,2,3,4]
-Array.prototype.myPop = function(){
-    var len = this.length
-    if(len == 0){
-        return undefined
-    }
-    return this.splice([len - 1],1)[0]
+    return result
 }
 
-// unshift
-Array.prototype.myUnshift = function(){
-    var that = deepClone(arguments);
-    for(var i = 0 ; i < this.length ; i ++){
-        that[that.length] = this[i]
-    }
-    deepClone(that,this)
-    return this
-}
+// 圣杯模式
 
-// shift
-Array.prototype.myShift = function(){
-    return this.splice(0,1)[0]
-}
+var inherit = (function(){
+    function F(){};
+    return function(Origin,Target){
+        F.prototype = Origin.prototype;
+        Target.prototype = new F();
+        Target.prototype.constructor = Target;
+        Target.prototype.uber = Origin.prototype;
+    }
+}())
+

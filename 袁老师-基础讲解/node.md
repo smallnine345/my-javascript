@@ -683,6 +683,129 @@ Array.prototype.push = function(target){
 
 
 ```
+
+# dom 
+- document object model
+- dom定义了表示和修改文档所需的方法。dom对象即为宿主对象，由浏览器厂商定义，用来操作html和xml功能的一类对象的集合。也有人称dom是对html及xml的标准编程接口。
+
+## document
+
+- document代表整个文档。
+
+### 查找标签
+```html
+<div id='demo'></div>
+<div class='active'></div>
+<input type='text' name='fruit'>
+```
+1. ```document.getElementById('demo')```
+兼容性：ie8以下的浏览器，不区分id大小写，而且也返回匹配name的标签。
+2. ```document.getElementsByTagName('div')```
+兼容性：没有兼容性问题
+3. ```document.getElementsByClassName('active')```
+兼容性：ie8及ie8以下的版本中没有，可以多个那么class一起。
+4. ```document.getElementsByName("fruit")```
+兼容性：不是所有标签都好使
+
+1. ```document.querySelector('.active')```
+特点： 静态的
+2. ```document.querySelectorAll('div.active')```
+特点： 选一组
+
+### 节点的类型
+1. 元素节点 --> 1 text
+2. 属性节点 --> 2 
+3. 文本节点 --> 3 
+4. 注释节点 --> 8 comment
+5. document --> 9
+6. DocumentFragment --> 11
+
+
+
+### 遍历节点数
+1. parentNode 父节点
+2. childNodes 子节点们
+3. firstChild 第一个子节点 
+4. lastChild  最后一个子节点
+5. nextSibling 后一个兄弟节点
+6. previousSibling 前一个兄弟节点
+
+- 没有浏览器兼容性的问题
+
+### 基于元素遍历的节点数
+
+1. parentElement 父元素节点
+2. children 元素子节点
+3. firstElementChild 第一个子元素节点
+4. lastElementChild  最后一个子元素节点
+5. nextElementSibling   后一个兄弟元素节点
+6. previousElementSibling   前一个兄弟元素节点
+
+- children 都兼容
+- 其他的ie9以下都不兼容
+
+### 节点的四个属性
+
+1. nodeName 
+- 元素的标签名，以大写形式表示，只读
+- 不是元素标签则显示 #comment #text 
+
+2. nodeValue
+- 只有文本节点和注释节点才有这个属性，能读能写
+
+3. nodeType
+- 该节点的类型，只读
+- 返回值为数字 1表示元素、2表示属性、3表示文本、8表示注释、9表示document
+
+4. attributes
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- 1 - 元素节点
+  2 - 
+  3 -
+  4 -
+  8 -
+  9 -
+  11 - 
  
 
 

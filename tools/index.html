@@ -7,13 +7,34 @@
     <title>Document</title>
 </head>
 <body>
+        <div>
+            <a href="" name='13'></a>
+            <b></b>
+            <i></i>
+         </div>
     <script src="./tools.js"></script>
     <script>
-        var a = [1,2,3]
-        console.log(a.myShift(),a)
-        console.log(a.myShift(),a)
-        console.log(a.myShift(),a)
-        console.log(a.myShift(),a)
+        var div = document.getElementsByTagName('div')[0];
+        function retElementChild(div){
+            var len = div.childNodes.length,
+                i,
+                obj = {
+                    'length':0,
+                    push:Array.prototype.push,
+                    splice:Array.prototype.splice
+                },
+                arr = [];
+                for(i = 0 ; i < len;i++){
+                    if(div.childNodes[i].nodeType == 1){
+                        arr.push(div.childNodes[i])
+                        obj.push(div.childNodes[i])
+                    }
+                }
+            console.log(obj)
+        }
+
+      retElementChild(div) 
+
     </script>
 </body>
 </html>
