@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background-color: rgb(21, 201, 233);
+            position:absolute;
+            left:0;
+            top:0;
+        }
+        button{
+            position:fixed;
+            width: 150px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: #000;
+            color:#fff;
+            font-size: 20px;
+            right:0;
+            top:50%;
+            margin-top:-25px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <button>开始</button>
+    <script src="../../tools/tools.js"></script>
+    <script>
+        var div = document.getElementsByTagName('div')[0],
+            btn = document.getElementsByTagName('button')[0],
+            key = true,
+            timer,
+            speedX = 10,
+            speedY = 10;
+        btn.onclick = function(){
+            if(key){
+                timer = setInterval(()=>{
+                    move(div)                 
+                },20)
+                this.innerText = '暂停';
+                key = false;
+            }else{
+                clearInterval(timer);
+                key = true;
+                this.innerText = '开始'
+            }
+        
+        }   
+        function move(dom){
+            var viewportSize = getViewportOffset(),
+                viewX = viewportSize.width - 5,
+                viewY = viewportSize.height,
+                iCurX = parseInt( dom.getStyle('left') ),
+                iCurY = parseInt(dom.getStyle('top') ),
+                domWidth = parseInt(dom.getStyle('width')),
+                domHeight =parseInt(dom.getStyle('height')),
+                afterValueX = iCurX + speedX,
+                afterValueY = iCurY + speedY;   
+                console.log(speedX,speedY)
+                if(afterValueY + domHeight  > viewY){
+                    afterValueY = viewY - domHeight;
+                    speedY *= -1;
+                }
+                if(afterValueY  < 0){
+                    dom.style.top = 0 ;
+                    speedY *= -1;
+                }
+                if(iCurX + domWidth + speedX > viewX){
+                    dom.style.left = viewX - domWidth;
+                    speedX *= -1;
+                }
+                if(afterValueX  < 0){
+                    dom.style.left = 0 ;
+                    speedX *= -1;
+                }
+
+                dom.style.left = afterValueX + 'px'
+                dom.style.top = afterValueY + 'px'
+        } 
+
+        // move(div);
+    </script>
+</body>
+</html>

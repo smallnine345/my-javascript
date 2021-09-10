@@ -1,0 +1,81 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        ul{
+            margin:0;
+            padding:0;
+        }
+        .wrapper,
+        .wrapper ul li,
+        .wrapper ul li a,
+        .wrapper ul li a img{
+            width: 800px;
+            height: 500px;
+        }
+        .wrapper{
+            background-color: #f00;
+            position: relative;
+            margin:50px auto;
+            border:1px solid #000;
+            overflow: hidden;
+        }
+        .wrapper ul{
+            width: 4000px;
+            height: 500px;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+        .wrapper ul li{
+            float: left;
+            list-style: none;
+            margin:0;
+        }
+        .wrapper ul li a,
+        .wrapper ul li a img
+        {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+        <div class="wrapper">
+            <ul>
+                <li><a href="#"><img src="./src/img/ban1.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./src/img/ban2.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./src/img/ban3.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./src/img/ban4.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./src/img/ban1.jpg" alt=""></a></li>
+            </ul>
+        </div>
+    <script src="../../tools/tools.js"></script>
+    <script>
+        var div = document.getElementsByClassName('wrapper')[0],
+            ul = document.getElementsByTagName('ul')[0],
+            li = document.getElementsByTagName('li'),
+            liLen = li.length,
+            iCur,
+            liWidth = parseInt( li[0].getStyle('width'))
+            timer = setInterval(()=>{
+
+                if(parseInt( ul.getStyle('left') ) == -( (liLen - 1) * liWidth)){
+                    ul.style.left = 0 + 'px'
+                }
+
+                move(ul,{
+                    left:parseInt( ul.getStyle('left') ) - liWidth
+                })
+
+ 
+            },2000)
+    
+
+    </script>
+</body>
+</html>

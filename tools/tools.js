@@ -71,3 +71,115 @@ var inherit = (function(){
     }
 }())
 
+
+// 获取滚动条滚动的距离
+function getScrollOffset(){
+    if(window.pageXoffset){
+        return {
+            x : window.pageXoffset,
+            y : window.pageYoffset
+        }
+    }else{
+        return {
+            x : document.body.scrollLeft + document.documentElement.scrollLeft,
+            y : document.body.scrollTop + document.documentElement.scrollTop
+        }
+    }
+}
+
+// 利用childNodes方法筛选出子元素节点
+Element.prototype.retElementChild = function(){
+    var child = this.childNodes,
+        len = child.length,
+        i,
+        arr = [];
+        for(i = 0 ; i < len;i++){
+            if(child[i].nodeType == 1){
+                arr.push(child[i])
+            }
+        }
+    return arr
+}
+
+// 查看视口的尺寸
+function getViewportOffset(){
+    if(window.innerWidth){
+        return {
+            'width' : window.innerWidth, 
+            'height': window.innerHeight
+        }
+    }else{
+        if(document.compatMode === 'BackCompat'){
+            return {
+                'width' : document.body.clientWidth,  //怪异模式
+                'height': document.body.clientHeight  //怪异模式
+            }
+        }else{
+            return {
+                'width' : document.documentElement.clientWidth , //标准模式
+                'height': document.documentElement.clientHeight  //标准模式
+            }
+        }
+
+    }
+}
+
+//  查看元素相对于文档的坐标
+
+HTMLElement.prototype.getElementPosition = function(){
+    var obj = {
+        x:0,
+        y:0
+    },
+        that = this;
+    while(that.offsetParent){
+        obj.x += that.offsetLeft;
+        obj.y += that.offsetTop;
+        that = that.offsetParent
+    }
+    obj.x += that.offsetLeft;
+    obj.y += that.offsetTop;
+    return obj
+}
+
+
+// 获取元素的css样式  getComputeStyle 只读
+HTMLElement.prototype.getStyle = function(prop){
+    if(window.getComputedStyle){
+        return window.getComputedStyle(this,null)[prop]  //返回的值是计算过的
+    }else{
+        return this.currentStyle[prop]  // 返回的值不是计算的
+    }
+}
+
+// 运动函数
+// getStyle
+function move(dom,obj){
+    var l = parseInt( dom.getStyle.left ),
+        prop,
+        key = true,
+        iCur,
+        speed,
+        timer;
+    timer = setInterval(()=>{
+        if(key){
+            key = false
+            for(prop in obj){
+                if(obj.hasOwnProperty(prop)){
+                        iCur = parseInt(dom.getStyle(prop));
+                        // console.log(iCur)
+                        speed = ( obj[prop] - iCur ) / 7;
+                        speed = speed < 0 ? Math.floor(speed) : Math.ceil(speed)
+                        dom.style[prop] = iCur + speed + 'px'
+                    }
+                if(obj[prop] != iCur + speed){
+                    key = true
+                }
+            }
+        }
+        if(!key){
+            clearInterval(timer);
+        }
+    },10)
+}
+

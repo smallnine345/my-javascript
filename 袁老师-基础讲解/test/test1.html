@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <div class="active">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <div class="demo">3</div>
+            <p>4</p>
+        </div>
+    <script>
+        HTMLElement.prototype.nodeTree = function(){
+            
+        }
+
+
+        HTMLElement.prototype.myPreviousElementSibling = function(){
+            var n = 1,
+                that = this,
+                temp;
+            while(n){
+                temp = that.previousSibling;
+                if(temp == null){
+                    that = null;
+                    n = 0;
+                }else{
+                    if(temp.nodeType == 1){
+                        n = 0
+                    }
+                        that = temp;
+                }
+            }
+            return that;
+        }
+
+        HTMLElement.prototype.myNextElementSibling = function(){
+            var n = 1,
+                that = this,
+                temp;
+            while(n){
+                temp = that.nextSibling;
+                if(temp == null){
+                    n = 0;
+                    that = null;
+                }else{
+                    if(temp.nodeType == 1){
+                        n = 0
+                    }
+                        that = temp
+                }
+            }
+            return that;
+        }
+
+        HTMLElement.prototype.sibling = function(n){
+            var that = this
+            n = parseInt(n);
+            if(isNaN(n)){
+                return false;
+            }
+            if(n == 0 || n == undefined){
+                return this;
+            }else{
+                if(n>0){
+                    while(n-- && that){
+                        that = that.myNextElementSibling()
+                    }
+                }else{
+                    while(n++ && that){
+                        that = that.myPreviousElementSibling()
+                    }
+                }
+                return that;
+            }
+        }
+
+
+        HTMLElement.prototype.myChildren = function(){
+            var that = this,
+                child = this.childNodes,
+                len = child.length,
+                i,
+                obj = [];
+            for(i=0;i<len;i++){
+                if(child[i].nodeType == 1){
+                    obj.push(child[i])
+                }
+            } 
+            return obj;
+        }
+
+        HTMLElement.prototype.hasChildren = function(){
+            var demo = this.myChildren(),
+                len = demo.length,
+                result = len == 0 ? false : true;
+            return result;
+        }
+        var div = document.getElementsByClassName('active')[0],
+            demo,
+            prop;
+        
+        demo = div.hasChildren()
+        console.log(demo)
+   
+
+    
+    </script>
+</body>
+</html>

@@ -757,371 +757,52 @@ Array.prototype.push = function(target){
 - 该节点的类型，只读
 - 返回值为数字 1表示元素、2表示属性、3表示文本、8表示注释、9表示document
 
-4. attributes
-- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-- 1 - 元素节点
-  2 - 
-  3 -
-  4 -
-  8 -
-  9 -
-  11 - 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+4. attributes 
+ ```mermaid
+    graph LR
+    a[Node]-->Document-->HTMLDocument
+    a-->b(CharacterData)-->Text
+    b-->Comment
+    a-->Element-->d(HTMLElement)
+    d-->HTMLHeadElement
+    d-->HTMLBodyElement
+    d-->HTMLTitleElement
+    d-->HTMLParagraphElement
+    d-->HTMLInputElement
+    d-->...etc
+    a-->Attr
+```
+### dom元素的增、插、删、替
+
+1. 增
+- document.createElement()
+- document.createTextNode()
+- document.createComment()
+
+2. 插
+- appendChild
+任何一个元素节点都有appendChild方法，体现出来的效果类似于push
+如果appendChild的对象是已有的部分，则会剪贴。
+- parentNode.insertBefore(A,B)
+insert A  before B
+
+3. 删除
+- parentNode.removeChild()
+- node.remove()
+
+4. 替换
+- parentNode.replaceChild(new,origin)
+不常用
+
+### Element上的一些属性
+1. innerHTML
+2. innerText
+3. textContent
+
+### Element上的一些方法
+
+1. node.setAttribute(name,value)
+2. node.getAttribute(name)
 
 
 

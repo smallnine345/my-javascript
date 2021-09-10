@@ -1,39 +1,47 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            margin:0
+        }
+        .wrapper{
+            width: 800px;
+            height: 500px;
+            background-color: #f00;
+            position: relative;
+            margin:50px auto;
+            border:1px solid #000;
+            overflow: hidden;
+        }
+        .wrapper ul{
+            width: 4000px;
+            height: 500px;
+        }
+    </style>
 </head>
 <body>
-        <div>
-            <a href="" name='13'></a>
-            <b></b>
-            <i></i>
-         </div>
+        <div class="wrapper">
+            <ul>
+                <li><a href="#"><img src="" alt=""></a></li>
+                <li><a href="#"><img src="" alt=""></a></li>
+                <li><a href="#"><img src="" alt=""></a></li>
+                <li><a href="#"><img src="" alt=""></a></li>
+                <li><a href="#"><img src="" alt=""></a></li>
+            </ul>
+        </div>
     <script src="./tools.js"></script>
     <script>
-        var div = document.getElementsByTagName('div')[0];
-        function retElementChild(div){
-            var len = div.childNodes.length,
-                i,
-                obj = {
-                    'length':0,
-                    push:Array.prototype.push,
-                    splice:Array.prototype.splice
-                },
-                arr = [];
-                for(i = 0 ; i < len;i++){
-                    if(div.childNodes[i].nodeType == 1){
-                        arr.push(div.childNodes[i])
-                        obj.push(div.childNodes[i])
-                    }
-                }
-            console.log(obj)
-        }
+        var div = document.getElementsByClassName('wrapper')[0],
+            ul = document.getElementsByTagName('ul')[0],
+            timer = setInterval(()=>{
 
-      retElementChild(div) 
+            },3000)
+    
 
     </script>
 </body>
